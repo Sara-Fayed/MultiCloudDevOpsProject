@@ -4,7 +4,7 @@
 
 3) In the Installed plugins I will check the installation of the required plugins [Docker Pipeline Plugin, Git Plugin].
 
-4) If I do not find them I will go to the Available plugins, Search for the missing plugin and install it    from the checkbox.
+4) If I do not find them I will go to the Available plugins, Search for the missing plugin and install it from the checkbox.
 
 5) I will restart jenkins after the installation process finished.
 
