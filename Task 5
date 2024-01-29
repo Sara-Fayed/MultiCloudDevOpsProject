@@ -1,0 +1,11 @@
+1) I will sign into my account and access jenkins dashboard.
+
+2) I will click on manage jenkins and then click on plugins.
+
+3) In the Installed plugins I will check the installation of the required plugins [Docker Pipeline Plugin, Git Plugin].
+
+4) If I do not find them I will go to the Available plugins, Search for the missing plugin and install it    from the checkbox.
+
+5) I will restart jenkins after the installation process finished.
+
+6) I will make sure that they are installed in the Installed plugins.
