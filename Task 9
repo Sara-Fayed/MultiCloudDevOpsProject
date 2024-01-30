@@ -1,0 +1,38 @@
+1) I will login in to my AWS account.
+2) I will create S3 bucket.
+3) I will create IAM policy to give permissions tp read & write objects in the bucket, then I will attach it to the user that will use terraform files.
+4) I will create terraform backend file to use S3 bucket:
+
+terraform {
+  backend "s3" {
+    bucket         = "bucket-name"
+    key            = "terraform.tfstate"
+    region         = "your-region"
+    dynamodb_table = "terraform_locks" # Name of the DynamoDB table to use for state locking
+  }
+}
+
+5) I will ensure that cloudwatch metrics and logs are enabled into my bucket settings.
+6) I will use terraform to define cloudwatch alarms for monitoring metrics of my s3 bucket.
+7) I will create backend terraform file to define cloudwatch service:
+
+resource "aws_cloudwatch_metric_alarm" "example" {
+  alarm_name          = "example"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/EC2"
+  period              = "300"
+  statistic           = "Average"
+  threshold           = "90"
+  actions_enabled     = true
+
+  dimensions = {
+    InstanceId = "instance-id"
+  }
+
+  alarm_description = "This metric monitors CPU utilization"
+  alarm_actions     = ["arn:aws:sns:us-east-1:123456789012:my-notification-topic"]
+}
+
+8) I will deploy terraform [terraform init >> terraform plan >> terraform apply].
