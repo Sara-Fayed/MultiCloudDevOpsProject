@@ -7,11 +7,17 @@ WORKDIR /app
 # Copy only the build files needed for dependency resolution
 COPY build.gradle settings.gradle ./
 
-# Download and resolve dependencies using the Gradle Wrapper
+# Copy the Gradle Wrapper files
 COPY gradlew .
 COPY gradle gradle
+
+# Set executable permissions for Gradle Wrapper
+RUN chmod +x ./gradlew
+
+# Run Gradle Wrapper to download dependencies
+RUN ./gradlew --version
 RUN ./gradlew dependencies
-RUN chmod +x gradlew
+
 # Copy the rest of the source code
 COPY . .
 
@@ -32,3 +38,4 @@ EXPOSE 8080
 
 # Define the command to run your application
 CMD ["java", "-jar", "app.jar"]
+
