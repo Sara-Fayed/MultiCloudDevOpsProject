@@ -1,0 +1,14 @@
+---
+- name: Add SonarQube repository
+  yum_repository:
+    name: sonarqube
+    description: SonarQube Official Repository
+    baseurl: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.9.3.48735.zip
+    gpgcheck: no
+    enabled: yes
+
+- name: Install SonarQube
+  package:
+    name: sonarqube
+    state: present
+
