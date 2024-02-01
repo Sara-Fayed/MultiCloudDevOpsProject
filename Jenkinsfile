@@ -34,6 +34,15 @@ pipeline {
             }
         }
 
+        stage('SonarQube Test') {
+            steps {
+                // Execute SonarQube analysis
+                withSonarQubeEnv('SonarQube Server') {
+                    sh 'mvn sonar:sonar'
+                }
+            }
+        }
+
         stage('Build and Dockerize') {
             steps {
                 // Build your application (adjust this based on your build tool, e.g., Maven, Gradle)
@@ -47,7 +56,7 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                sh "echo 'Sara_Fayed_111308' | docker login -u sarafayed --password-stdin"
+                sh "echo \${DOCKER_REGISTRY_PASSWORD} | docker login -u \${DOCKER_REGISTRY_USERNAME} --password-stdin"
                 sh "docker push docker.io/${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:${imageTagApp}"
             }
         }
