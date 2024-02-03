@@ -38,7 +38,7 @@ pipeline {
             steps {
                 // Execute SonarQube analysis
                 withSonarQubeEnv('SonarQube Server') {
-                    sh 'mvn sonar:sonar'
+                    sh "./gradlew sonar"
                 }
             }
         }
