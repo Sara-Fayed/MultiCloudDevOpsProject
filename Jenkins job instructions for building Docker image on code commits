@@ -9,3 +9,38 @@
 5) I will restart jenkins after the installation process finished.
 
 6) I will make sure that they are installed in the Installed plugins.
+
+
+
+7) I will create a New Jenkins Job:
+
+- Go to Jenkins dashboard and click on "New Item".
+Enter a name for your job and select "Pipeline" as the job type.
+Configure Pipeline:
+
+In the pipeline section, select "Pipeline script from SCM".
+Choose Git as the SCM.
+Enter the repository URL.
+Set the branch specifier to monitor for changes.
+Define Pipeline Script:
+
+Write a Jenkinsfile in your repository's root directory.
+Example Jenkinsfile:
+pipeline {
+    agent any
+    stages {
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build('your_image_name:latest')
+                }
+            }
+        }
+    }
+}
+
+Make sure Jenkins has access to Docker:
+Install Docker on the Jenkins server.
+Ensure the Jenkins user has permissions to run Docker commands.
+Save your Jenkins job configuration and run.
+
