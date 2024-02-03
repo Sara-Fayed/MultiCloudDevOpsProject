@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: true
+  roles:
+    - install_packages
+    - install_jenkins
+    - install_sonarqube
+    - setup_env_vars
+
